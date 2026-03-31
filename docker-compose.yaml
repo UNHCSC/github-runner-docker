@@ -1,0 +1,17 @@
+services:
+  runner:
+    build: .
+    restart: always
+    environment:
+      - REPOSITORY_URL=https://github.com/<OWNER>/<REPO>
+      - RUNNER_TOKEN=<CLASSIC_PAT_WITH_REPO_SCOPE_OR_FINE_GRAINED_TOKEN_WITH_ADMINISTRATION_WRITE>
+    deploy:
+      mode: replicated
+      replicas: 8
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
